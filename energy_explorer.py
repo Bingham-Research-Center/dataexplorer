@@ -203,15 +203,15 @@ def create_scatter_plot(df, x_metric, y_metric):
         }
     )
     
-    # Add trend line
-    fig.add_traces(
-        px.scatter(
-            plot_data, 
-            x=x_metric, 
-            y=y_metric, 
-            trendline="ols"
-        ).data
-    )
+#     # Add trend line
+#     fig.add_traces(
+#         px.scatter(
+#             plot_data, 
+#             x=x_metric, 
+#             y=y_metric, 
+#             trendline="ols"
+#         ).data
+#     )
     
     # Customize the scatter plot
     fig.update_traces(
