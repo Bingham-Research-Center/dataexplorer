@@ -203,26 +203,34 @@ def create_scatter_plot(df, x_metric, y_metric):
         }
     )
     
-#     # Add trend line
-#     fig.add_traces(
-#         px.scatter(
-#             plot_data, 
-#             x=x_metric, 
-#             y=y_metric, 
-#             trendline="ols"
-#         ).data
-#     )
+    # Add simple linear trend line using numpy
+    x_data = plot_data[x_metric].values
+    y_data = plot_data[y_metric].values
+    
+    # Calculate linear regression using numpy
+    coefficients = np.polyfit(x_data, y_data, 1)  # 1 = linear
+    trend_line = np.poly1d(coefficients)
+    
+    # Create trend line data points
+    x_trend = np.linspace(x_data.min(), x_data.max(), 100)
+    y_trend = trend_line(x_trend)
+    
+    # Add trend line to the plot
+    fig.add_trace(
+        go.Scatter(
+            x=x_trend,
+            y=y_trend,
+            mode='lines',
+            name='Trend Line',
+            line=dict(color='red', width=2),
+            hovertemplate='Trend Line<extra></extra>'
+        )
+    )
     
     # Customize the scatter plot
     fig.update_traces(
         marker=dict(size=10, opacity=0.7, color='#1f77b4'),
         selector=dict(mode='markers')
-    )
-    
-    # Update trend line appearance
-    fig.update_traces(
-        line=dict(color='red', width=2),
-        selector=dict(mode='lines')
     )
     
     # Customize text labels - small font and position to avoid overlap
@@ -234,7 +242,8 @@ def create_scatter_plot(df, x_metric, y_metric):
     
     fig.update_layout(
         height=500,
-        hovermode='closest'
+        hovermode='closest',
+        showlegend=False  # Hide legend since we only have one trend line
     )
     
     return fig
