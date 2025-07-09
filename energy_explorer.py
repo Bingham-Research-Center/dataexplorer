@@ -309,11 +309,11 @@ def main():
     Oil and gas activity data are from the [Utah Division of Oil, Gas and Mining](https://ogm.utah.gov/). Oil and gas price data are from eia.gov.
     Trends in air emissions data may be due to changes in technologies, regulations, or standard indusry practices.  
     We note the following major regulatory rulemakings and other significant actions that may have impacted emissions trends:
-    -CFR40, Part 60, Subpart OOOO, regulating organic compound emissions from new or modified oil and gas facilities, was phased in by EPA between 2012 and 2015.
-    -CFR40, Part 60, Subpart OOOOa, requiring periodic leak detection and repair at many facilities, was implemented in 2016.
-    -A survey of operators in 2018 found that 83% performed leak detection and repair at all their facilities at least annually.
-    -Full compliance with the EPA Federal Implementation Plan for Indian Country Lands of the Uintah and Ouray Indian Reservation was required by February 2024.
-    
+    * 2012-2015: CFR40, Part 60, Subpart OOOO, regulating organic compound emissions from new or modified oil and gas facilities, was phased in by EPA
+    * 2016: CFR40, Part 60, Subpart OOOOa, requiring periodic leak detection and repair at many facilities, was implemented.
+    * 2018: A survey of operators found that 83% performed leak detection and repair at all their facilities at least annually.
+    * 2024: Full compliance with the EPA Federal Implementation Plan for Indian Country Lands of the Uintah and Ouray Indian Reservation was required.
+
     """)
 
     st.markdown("---")  # Add another divider line
