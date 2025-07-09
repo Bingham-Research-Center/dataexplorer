@@ -80,8 +80,8 @@ display_names = {
     'highprodwells': 'High-Yield Wells (count)',
     'lowprodwells': 'Low-Yield Wells (count)',
     'emissintens_gas': 'Gas Emission Intensity (J emitted/J gas produced)',
-    'emissinens_totenergy': 'Total Energy Emission Intensity (J emitted/J total energy produced)'
-    'Utahgasprice_dollperMCF': 'Average industrial natural gas price in Utah ($/MCF)'
+    'emissinens_totenergy': 'Total Energy Emission Intensity (J emitted/J total energy produced)',
+    'Utahgasprice_dollperMCF': 'Average industrial natural gas price in Utah ($/MCF)',
     'Utahcrudeprice_dollperBBL': 'Average first purchase crude oil price in Utah ($/bbl)'
 }
 
