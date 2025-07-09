@@ -306,12 +306,12 @@ def main():
     st.markdown("""
     This Explorer contains annual emissions, air quality, and oil and gas activity data for the Uinta Basin, Utah. 
     Emissions and air quality data were compiled by the [USU Bingham Research Center](https://www.usu.edu/binghamresearch/). 
-    Oil and gas activity data are from the [Utah Division of Oil, Gas and Mining](https://ogm.utah.gov/). Oil and gas price data are from eia.gov.
+    Oil and gas activity data are from the [Utah Division of Oil, Gas and Mining](https://ogm.utah.gov/). Oil and gas price data are from [eia.gov](https://www.eia.gov/).
     Trends in air emissions data may be due to changes in technologies, regulations, or standard indusry practices.  
     We note the following major regulatory rulemakings and other significant actions that may have impacted emissions trends:
     * 2012-2015: CFR40, Part 60, Subpart OOOO, regulating organic compound emissions from new or modified oil and gas facilities, was phased in by EPA
     * 2016: CFR40, Part 60, Subpart OOOOa, requiring periodic leak detection and repair at many facilities, was implemented.
-    * 2018: A survey of operators found that 83% performed leak detection and repair at all their facilities at least annually.
+    * 2018: A [survey of operators](https://online.ucpress.edu/elementa/article/doi/10.1525/elementa.381/112514/Aerial-and-ground-based-optical-gas-imaging-survey) found that 83% performed leak detection and repair at all their facilities at least annually.
     * 2024: Full compliance with the EPA Federal Implementation Plan for Indian Country Lands of the Uintah and Ouray Indian Reservation was required.
 
     """)
