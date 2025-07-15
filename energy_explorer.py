@@ -10,19 +10,34 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # Google Analytics tracking
+# def add_google_analytics():
+#     """Add Google Analytics tracking to the app"""
+#     ga_code = """
+#     <!-- Google tag (gtag.js) -->
+#     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SHRBGEW9GD"></script>
+#     <script>
+#       window.dataLayer = window.dataLayer || [];
+#       function gtag(){dataLayer.push(arguments);}
+#       gtag('js', new Date());
+#       gtag('config', 'G-SHRBGEW9GD');
+#     </script>
+#     """
+#     components.html(ga_code, height=0)
 def add_google_analytics():
-    """Add Google Analytics tracking to the app"""
-    ga_code = """
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SHRBGEW9GD"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-SHRBGEW9GD');
-    </script>
-    """
-    components.html(ga_code, height=0)
+    """Add Google Analytics tracking to the app (once per session)"""
+    if 'ga_loaded' not in st.session_state:
+        st.session_state.ga_loaded = True
+        ga_code = """
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-SHRBGEW9GD"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-SHRBGEW9GD');
+        </script>
+        """
+        components.html(ga_code, height=0)
 
 
 # Set page config
