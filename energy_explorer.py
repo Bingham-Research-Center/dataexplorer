@@ -23,11 +23,12 @@ warnings.filterwarnings('ignore')
 #     </script>
 #     """
 #     components.html(ga_code, height=0)
-def add_google_analytics():
-    """Add Google Analytics tracking to the app (once per session)"""
-    if 'ga_loaded' not in st.session_state:
-        st.session_state.ga_loaded = True
-        ga_code = """
+def add_google_analytics_v2():
+    """Alternative: Add GA with explicit iframe handling"""
+    ga_code = """
+    <!DOCTYPE html>
+    <html>
+    <head>
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-SHRBGEW9GD"></script>
         <script>
@@ -35,9 +36,17 @@ def add_google_analytics():
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', 'G-SHRBGEW9GD');
+          
+          // Debug: Log to console
+          console.log('Google Analytics loaded');
         </script>
-        """
-        components.html(ga_code, height=0)
+    </head>
+    <body>
+    <!-- This iframe contains the GA code -->
+    </body>
+    </html>
+    """
+    components.html(ga_code, height=0)
 
 
 # Set page config
