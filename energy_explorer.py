@@ -3,10 +3,27 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import streamlit as st
+import streamlit.components.v1 as components
 import numpy as np
 from datetime import datetime
 import warnings
 warnings.filterwarnings('ignore')
+
+# Google Analytics tracking
+def add_google_analytics():
+    """Add Google Analytics tracking to the app"""
+    ga_code = """
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SHRBGEW9GD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SHRBGEW9GD');
+    </script>
+    """
+    components.html(ga_code, height=0)
+
 
 # Set page config
 st.set_page_config(
@@ -297,6 +314,10 @@ def create_distribution_plot(df, selected_metric):
 
 def main():
     """Main application"""
+    
+    # Add Google Analytics tracking first (before any content)
+    add_google_analytics()
+    
     # Integrated header with logo and title
     st.image("https://www.usu.edu/binghamresearch/images/logos/BRS_01_UStateLeft_AggieBlue.png", width=600)
     st.markdown('<h1 style="font-size: 3rem; font-weight: bold; color: #1e3a5f; margin-bottom: 2rem; text-align: left;">Uinta Basin Energy and Emissions Data Explorer</h1>', unsafe_allow_html=True)
@@ -305,7 +326,7 @@ def main():
     # Explanation section
     st.markdown("""
     This Explorer contains annual emissions, air quality, and oil and gas activity data for the Uinta Basin, Utah. 
-    Emissions and air quality data were compiled by the [USU Bingham Research Center](https://www.usu.edu/binghamresearch/). 
+    Emissions and air quality data were compiled by the [USU Bingham Research Center](https://www.usu.edu/binghamresearch/dataexplorer). 
     Oil and gas activity data are from the [Utah Division of Oil, Gas and Mining](https://ogm.utah.gov/). Oil and gas price data are from [eia.gov](https://www.eia.gov/).
     Trends in air emissions data may be due to changes in technologies, regulations, or standard indusry practices.  
     We note the following major regulatory rulemakings and other significant actions that may have impacted emissions trends:
@@ -479,3 +500,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
