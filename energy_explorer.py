@@ -9,44 +9,21 @@ from datetime import datetime
 import warnings
 warnings.filterwarnings('ignore')
 
-# Google Analytics tracking
-# def add_google_analytics():
-#     """Add Google Analytics tracking to the app"""
-#     ga_code = """
-#     <!-- Google tag (gtag.js) -->
-#     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SHRBGEW9GD"></script>
-#     <script>
-#       window.dataLayer = window.dataLayer || [];
-#       function gtag(){dataLayer.push(arguments);}
-#       gtag('js', new Date());
-#       gtag('config', 'G-SHRBGEW9GD');
-#     </script>
-#     """
-#     components.html(ga_code, height=0)
-def add_google_analytics_v2():
-    """Alternative: Add GA with explicit iframe handling"""
+Google Analytics tracking
+def add_google_analytics():
+    """Add Google Analytics tracking to the app"""
     ga_code = """
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-SHRBGEW9GD"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-SHRBGEW9GD');
-          
-          // Debug: Log to console
-          console.log('Google Analytics loaded');
-        </script>
-    </head>
-    <body>
-    <!-- This iframe contains the GA code -->
-    </body>
-    </html>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SHRBGEW9GD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SHRBGEW9GD');
+    </script>
     """
     components.html(ga_code, height=0)
+
 
 
 # Set page config
