@@ -9,7 +9,7 @@ from datetime import datetime
 import warnings
 warnings.filterwarnings('ignore')
 
-Google Analytics tracking
+#Google Analytics tracking
 def add_google_analytics():
     """Add Google Analytics tracking to the app"""
     ga_code = """
