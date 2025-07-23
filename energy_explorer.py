@@ -78,27 +78,27 @@ def load_data():
 # Custom display names for variables
 display_names = {
     'year': 'Year',
-    'basinwide_ch4_emiss_Mg_hr': 'Uinta Basin-wide Methane Emissions (Mg/hr)',
-    'oil_million_bbls': 'Oil Production (million bbl/yr)',
-    'gas_million_bbleq': 'Gas Production (million bbl-eq/yr)',
-    'energy_million_bbleq': 'Total Energy Production (million bbl-eq/yr)',
-    'oil_gas_ratio': 'Oil to Gas Ratio (J/J)',
-    'winterozone_exceed_num': 'Winter Ozone Exceedances (number of days/yr)',
-    'producing_wells': 'Total Producing Wells (count)',
-    'newwells': 'New Wells (count)',
-    'prodfromhighwells_thousbbleq_mnth': 'High-Yield Well Production (thousand bbl-eq/month)',
-    'prodfromlowwells_thousbbleq_mnth': 'Low-Yield Well Production (thousand bbl-eq/month)',
-    'prodfromoilwells_thousbbleq_mnth': 'Oil Well Production (thousand bbl-eq/month)',
-    'prodfromgaswells_thousbbleq_mnth': 'Gas Well Production (thousand bbl-eq/month)',
-    'pcnt_prodfromhighwells': 'Percentage of total production from High-Yield Wells (%)',
-    'gaswells': 'Gas Wells (count)',
-    'oilwells': 'Oil Wells (count)',
-    'new_gaswells': 'New Gas Wells (number of new wells in the year)',
-    'new_oilwells': 'New Oil Wells (number of new wells in the year)',
-    'highprodwells': 'High-Yield Wells (count)',
-    'lowprodwells': 'Low-Yield Wells (count)',
-    'emissinens_totenergy': 'Total Energy Emission Intensity (J emitted/J total energy produced)',
-    'emissintens_gas': 'Gas Emission Intensity (J emitted/J gas produced)',
+    'basinwide_ch4_emiss_Mg_hr': 'Uinta Basin-wide methane emissions (Mg/hr)',
+    'oil_million_bbls': 'Oil production (million bbl/yr)',
+    'gas_million_bbleq': 'Gas production (million bbl-eq/yr)',
+    'energy_million_bbleq': 'Total energy production (million bbl-eq/yr)',
+    'oil_gas_ratio': 'Oil to gas ratio (J/J)',
+    'winterozone_exceed_num': 'Winter ozone exceedances (number of days/yr)',
+    'producing_wells': 'Total producing wells (count)',
+    'newwells': 'New wells (count)',
+    'prodfromhighwells_thousbbleq_mnth': 'High-yield well production (thousand bbl-eq/month)',
+    'prodfromlowwells_thousbbleq_mnth': 'Low-yield well production (thousand bbl-eq/month)',
+    'prodfromoilwells_thousbbleq_mnth': 'Oil well production (thousand bbl-eq/month)',
+    'prodfromgaswells_thousbbleq_mnth': 'Gas well production (thousand bbl-eq/month)',
+    'pcnt_prodfromhighwells': 'Percentage of total production from high-yield wells (%)',
+    'gaswells': 'Gas wells (count)',
+    'oilwells': 'Oil wells (count)',
+    'new_gaswells': 'New gas wells (number of new wells in the year)',
+    'new_oilwells': 'New oil wells (number of new wells in the year)',
+    'highprodwells': 'High-yield wells (count)',
+    'lowprodwells': 'Low-yield wells (count)',
+    'emissinens_totenergy': 'Total energy emissions intensity (J emitted/J total energy produced)',
+    'emissintens_gas': 'gas emissions intensity (J emitted/J gas produced)',
     'emisCO2eq20_millnMg': 'Basin-wide methane emissions as CO2 equiv. (million Mg/yr; 20-yr global warming potential)', 
     'Utahgasprice_dollperMCF': 'Average industrial natural gas price in Utah ($/MCF)',
     'Utahcrudeprice_dollperBBL': 'Average first purchase crude oil price in Utah ($/bbl)'
@@ -337,7 +337,8 @@ def main():
     * 2016: CFR40, Part 60, Subpart OOOOa, requiring periodic leak detection and repair at many facilities, was implemented.
     * 2018: A [survey of operators](https://online.ucpress.edu/elementa/article/doi/10.1525/elementa.381/112514/Aerial-and-ground-based-optical-gas-imaging-survey) found that 83% performed leak detection and repair at all their facilities at least annually.
     * 2024: Full compliance with the EPA Federal Implementation Plan for Indian Country Lands of the Uintah and Ouray Indian Reservation was required.
-
+    
+    Detailed information about the data used in this app is available at https://www.usu.edu/binghamresearch/dataexplorer.
     """)
 
     st.markdown("---")  # Add another divider line
@@ -453,10 +454,39 @@ def main():
             
         # Scatter plot analysis
         st.subheader("📊 Scatter Plot Analysis")
-        
+
+        # Add expandable instructions
+        with st.expander("ℹ️ Scatter Plot Instructions"):
+            st.markdown("""
+            **How to use the Scatter Plot:**
+            
+            - **Variable Selection**: Choose different variables for X and Y axes using the dropdowns below
+            - **Interactive Features**:
+                - Hover over points to see exact values and year labels
+                - Each point represents one year of data
+                - Year labels are displayed on each data point
+            
+            **Understanding the Plot:**
+            - **Data Points**: Each dot represents one year, showing the relationship between two variables
+            - **Red Trend Line**: Shows the overall linear relationship (ordinary least squares regression)
+            - **Correlation Coefficient**: Displayed below the plot (r value from -1 to +1)
+            
+            **Interpreting Relationships:**
+            - **Upward trend**: Positive relationship (as X increases, Y tends to increase)
+            - **Downward trend**: Negative relationship (as X increases, Y tends to decrease)
+            - **Scattered points**: Weak or no linear relationship
+            - **Points close to trend line**: Strong linear relationship
+            
+            **Analysis Tips:**
+            - Compare the correlation coefficient with what you see visually
+            - Look for outlier years that don't follow the general pattern
+            - Consider time-based trends (are recent years clustered differently?)
+            - Use insights from the correlation matrix to guide variable selection
+            """)
+
         # Create two columns for x and y variable selection
         col1, col2 = st.columns(2)
-        
+
         with col1:
             x_variable = st.selectbox(
                 "Select X-axis variable:",
@@ -464,7 +494,7 @@ def main():
                 index=numeric_columns.index('gas_million_bbleq') if 'gas_million_bbleq' in numeric_columns else 0,
                 format_func=get_display_name
             )
-        
+
         with col2:
             y_variable = st.selectbox(
                 "Select Y-axis variable:",
@@ -472,7 +502,7 @@ def main():
                 index=numeric_columns.index('basinwide_ch4_emiss_Mg_hr') if 'basinwide_ch4_emiss_Mg_hr' in numeric_columns else 1,
                 format_func=get_display_name
             )
-        
+
         # Create and display scatter plot
         if x_variable != y_variable:
             fig_scatter = create_scatter_plot(filtered_df, x_variable, y_variable)
