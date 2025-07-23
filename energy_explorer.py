@@ -185,14 +185,24 @@ def create_correlation_heatmap(df, selected_metrics=None):
             title="🔗 Correlation matrix for variables selected in the time series"
         )
         
-        # Add correlation values as text
+        # Add correlation values as text with improved color logic
         for i in range(len(corr_matrix.columns)):
             for j in range(len(corr_matrix.columns)):
+                corr_value = corr_matrix.iloc[j, i]
+                
+                # Improved text color logic based on correlation value
+                # Use white text for very strong correlations (dark colors)
+                # Use black text for weak to moderate correlations (light colors)
+                if abs(corr_value) > 0.7:
+                    text_color = "white"
+                else:
+                    text_color = "black"
+                
                 fig.add_annotation(
                     x=i, y=j,
-                    text=str(round(corr_matrix.iloc[j, i], 2)),
+                    text=str(round(corr_value, 2)),
                     showarrow=False,
-                    font=dict(color="white" if abs(corr_matrix.iloc[j, i]) > 0.5 else "black")
+                    font=dict(color=text_color, size=12)  # Also made font slightly larger
                 )
         
         fig.update_layout(height=600)
@@ -330,7 +340,8 @@ def main():
     This Explorer contains annual emissions, air quality, and oil and gas activity data for the Uinta Basin, Utah. 
     Emissions and air quality data were compiled by the [USU Bingham Research Center](https://www.usu.edu/binghamresearch/dataexplorer).
     Oil and gas activity data are from the [Utah Division of Oil, Gas and Mining](https://ogm.utah.gov/). Oil and gas price data are from [eia.gov](https://www.eia.gov/).
-    Trends in air emissions data may be due to changes in technologies, regulations, or standard indusry practices.  
+    Trends in air emissions data may be due to changes in technologies, regulations, or standard indusry practices.
+    
     We note the following major regulatory rulemakings and other significant actions that may have impacted emissions trends:
     * 2012-2015: CFR40, Part 60, Subpart OOOO, regulating organic compound emissions from new or modified oil and gas facilities, was phased in by EPA
     * 2016: CFR40, Part 60, Subpart OOOOa, requiring periodic leak detection and repair at many facilities, was implemented.
