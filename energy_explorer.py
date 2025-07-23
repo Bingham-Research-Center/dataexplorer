@@ -180,9 +180,11 @@ def create_correlation_heatmap(df, selected_metrics=None):
             corr_matrix,
             x=display_labels,
             y=display_labels,
-            color_continuous_scale='RdBu_r',
+            color_continuous_scale='RdBu',  # Removed the '_r' to fix the color scheme
             aspect='auto',
-            title="🔗 Correlation matrix for variables selected in the time series"
+            title="🔗 Correlation matrix for variables selected in the time series",
+            zmin=-1,  # Ensure the scale goes from -1 to 1
+            zmax=1
         )
         
         # Add correlation values as text with improved color logic
@@ -190,10 +192,10 @@ def create_correlation_heatmap(df, selected_metrics=None):
             for j in range(len(corr_matrix.columns)):
                 corr_value = corr_matrix.iloc[j, i]
                 
-                # Improved text color logic based on correlation value
-                # Use white text for very strong correlations (dark colors)
-                # Use black text for weak to moderate correlations (light colors)
-                if abs(corr_value) > 0.7:
+                # Improved text color logic
+                # For RdBu colorscale: strong positive (red) and strong negative (blue) need white text
+                # Weak correlations (white/light colors) need black text
+                if abs(corr_value) > 0.6:  # Lowered threshold since colors get dark sooner
                     text_color = "white"
                 else:
                     text_color = "black"
