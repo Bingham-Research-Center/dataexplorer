@@ -99,6 +99,7 @@ display_names = {
     'lowprodwells': 'Low-Yield Wells (count)',
     'emissinens_totenergy': 'Total Energy Emission Intensity (J emitted/J total energy produced)',
     'emissintens_gas': 'Gas Emission Intensity (J emitted/J gas produced)',
+    'emisCO2eq20_millnMg': 'Basin-wide methane emissions as CO2 equiv. (million Mg/yr; 20-yr global warming potential)', 
     'Utahgasprice_dollperMCF': 'Average industrial natural gas price in Utah ($/MCF)',
     'Utahcrudeprice_dollperBBL': 'Average first purchase crude oil price in Utah ($/bbl)'
 }
@@ -327,7 +328,8 @@ def main():
     # Explanation section
     st.markdown("""
     This Explorer contains annual emissions, air quality, and oil and gas activity data for the Uinta Basin, Utah. 
-    Emissions and air quality data were compiled by the [USU Bingham Research Center](https://www.usu.edu/binghamresearch/dataexplorer). 
+    Emissions and air quality data were compiled by the [USU Bingham Research Center](https://www.usu.edu/binghamresearch/dataexplorer).
+    More information about emissions and air quality data are available at https://www.usu.edu/binghamresearch/dataexplorer.
     Oil and gas activity data are from the [Utah Division of Oil, Gas and Mining](https://ogm.utah.gov/). Oil and gas price data are from [eia.gov](https://www.eia.gov/).
     Trends in air emissions data may be due to changes in technologies, regulations, or standard indusry practices.  
     We note the following major regulatory rulemakings and other significant actions that may have impacted emissions trends:
