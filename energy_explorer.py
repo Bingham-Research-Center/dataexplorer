@@ -388,6 +388,31 @@ def main():
         # Time series plot
         if selected_metrics:
             st.subheader("📈 Time Series")
+            
+            # Add expandable instructions
+            with st.expander("ℹ️ Time Series Instructions"):
+                st.markdown("""
+                **How to use the Time Series plot:**
+                
+                - **Select Variables**: Use the "Select Metrics for Time Series" dropdown above to choose which variables to display
+                - **Adjust Time Range**: Use the year slider to focus on specific time periods
+                - **Interactive Features**:
+                    - Hover over data points to see exact values
+                    - Each variable is plotted in its own subplot with its own scale
+                    - The plots share the same x-axis (years) for easy comparison
+                
+                **Interpreting the Data:**
+                - Look for trends over time in each variable
+                - Compare timing of changes across different variables
+                - Note any correlations between variables (peaks and valleys at similar times)
+                - Consider external factors that might explain trends (regulations, market conditions, etc.)
+                
+                **Tips:**
+                - Start with 2-3 variables to avoid overcrowding
+                - Use the correlation matrix below to identify strongly related variables
+                - Adjust the year range to focus on periods of interest
+                """)
+            
             fig_ts = create_time_series_plot(filtered_df, selected_metrics)
             if fig_ts:
                 st.plotly_chart(fig_ts, use_container_width=True)
