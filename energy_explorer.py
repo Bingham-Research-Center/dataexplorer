@@ -329,7 +329,6 @@ def main():
     st.markdown("""
     This Explorer contains annual emissions, air quality, and oil and gas activity data for the Uinta Basin, Utah. 
     Emissions and air quality data were compiled by the [USU Bingham Research Center](https://www.usu.edu/binghamresearch/dataexplorer).
-    More information about emissions and air quality data are available at https://www.usu.edu/binghamresearch/dataexplorer.
     Oil and gas activity data are from the [Utah Division of Oil, Gas and Mining](https://ogm.utah.gov/). Oil and gas price data are from [eia.gov](https://www.eia.gov/).
     Trends in air emissions data may be due to changes in technologies, regulations, or standard indusry practices.  
     We note the following major regulatory rulemakings and other significant actions that may have impacted emissions trends:
@@ -438,6 +437,7 @@ def main():
                 - **-0.3 to +0.3**: Weak or no linear correlation
                 - **-0.7 to -0.3**: Moderate negative correlation
                 - **-1.0 to -0.7**: Strong negative correlation (as one increases, the other tends to decrease)
+                - These are Pearson r values
                 
                 **Tips for Analysis:**
                 - Look for dark red or dark blue cells to identify strong relationships
@@ -469,19 +469,21 @@ def main():
             **Understanding the Plot:**
             - **Data Points**: Each dot represents one year, showing the relationship between two variables
             - **Red Trend Line**: Shows the overall linear relationship (ordinary least squares regression)
-            - **Correlation Coefficient**: Displayed below the plot (r value from -1 to +1)
+            - **Correlation Coefficient**: Displayed below the plot (Pearson r value; ranges from -1 to +1)
             
             **Interpreting Relationships:**
             - **Upward trend**: Positive relationship (as X increases, Y tends to increase)
             - **Downward trend**: Negative relationship (as X increases, Y tends to decrease)
-            - **Scattered points**: Weak or no linear relationship
-            - **Points close to trend line**: Strong linear relationship
+            - **Scattered points with no obvious trend**: Weak or no linear relationship
+            - **Points close to the red trend line**: Strong linear relationship
             
             **Analysis Tips:**
             - Compare the correlation coefficient with what you see visually
             - Look for outlier years that don't follow the general pattern
             - Consider time-based trends (are recent years clustered differently?)
             - Use insights from the correlation matrix to guide variable selection
+            
+            **Note**: Plots only include data for the year range selected in the time series above.
             """)
 
         # Create two columns for x and y variable selection
@@ -518,11 +520,48 @@ def main():
         
         # Distribution Analysis
         st.subheader("📊 Distribution Analysis")
-        
+
         # Checkbox to enable distribution analysis
         show_distribution = st.checkbox("Show distribution analysis for a selected variable")
-        
+
         if show_distribution:
+            # Add expandable instructions (only when distribution analysis is enabled)
+            with st.expander("ℹ️ Distribution Analysis Instructions"):
+                st.markdown("""
+                **How to use the Distribution Analysis:**
+                
+                - **Variable Selection**: Choose any variable from the dropdown to analyze its distribution
+                - **Two Views**: The analysis shows both a histogram and box plot side by side
+                
+                **Understanding the Histogram (Left Plot):**
+                - **Bars**: Show frequency of values in different ranges (bins)
+                - **Shape**: Reveals the distribution pattern:
+                    - **Normal**: Bell-shaped, symmetric with the maximum at the center
+                    - **Skewed**: Long tail on one side (left or right skewed)
+                    - **Uniform**: Relatively flat across all values
+                    - **Bi- or multi-modal**: Two or more distinct peaks
+                
+                **Understanding the Box Plot (Right Plot):**
+                - **Box**: Shows the middle 50% of data (interquartile range)
+                - **Line in box**: Median (middle value)
+                - **Whiskers**: Extend to show data range (1.5 × IQR)
+                - **Dots**: Outliers (values far from the typical range)
+                
+                **Key Statistics Explained:**
+                - **Mean**: Average value (sensitive to outliers)
+                - **Median**: Middle value when sorted (robust to outliers)
+                - **Std Dev**: Measure of spread (higher relative to mean = more variability)
+                - **Range**: Difference between maximum and minimum values
+                
+                **Analysis Tips:**
+                - Compare mean vs median: if very different, data may be skewed
+                - Look for outliers that might need special attention
+                - Consider if the distribution shape matches your expectations
+                - Use this to understand data quality and variability
+                
+                **Note**: Plots only include data for the year range selected in the time series above.
+                """)
+            
             # Variable selection for distribution
             distribution_variable = st.selectbox(
                 "Select variable for distribution analysis:",
@@ -567,6 +606,37 @@ def main():
         
         # Statistical summary
         with st.expander("📈 Statistical Summary"):
+            # Add instructions dropdown within the statistical summary expander
+            with st.expander("ℹ️ Statistical Summary Instructions"):
+                st.markdown("""
+                **Understanding the Statistical Summary Table:**
+                
+                **Rows Explained:**
+                - **count**: Number of non-missing values for each variable
+                - **mean**: Average value across all years
+                - **std**: Standard deviation (measure of variability around the mean)
+                - **min**: Minimum (lowest) value observed
+                - **25%**: First quartile (25% of values are below this)
+                - **50%**: Median (middle value, 50% of values are above and below)
+                - **75%**: Third quartile (75% of values are below this)
+                - **max**: Maximum (highest) value observed
+                
+                **How to Interpret:**
+                - **Large std relative to mean**: High variability in the data
+                - **Mean vs Median**: If very different, data may be skewed
+                - **Quartiles (25%, 50%, 75%)**: Show how data is distributed
+                - **Range (max - min)**: Shows the full span of values
+                
+                **Analysis Tips:**
+                - Compare means across variables to understand relative scales
+                - Look for variables with high standard deviations relative to their means (more volatile)
+                - Use quartiles to identify typical ranges for each variable
+                - Check if minimums/maximums seem reasonable or might be outliers
+                - Consider which variables show the most/least variation over time
+                
+                **Note**: Statistics are calculated only for the year range selected in the time series above.
+                """)
+            
             # Create a copy of the dataframe with display names
             summary_df = filtered_df.describe()
             
