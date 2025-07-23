@@ -83,7 +83,7 @@ display_names = {
     'gas_million_bbleq': 'Gas production (million bbl-eq/yr)',
     'energy_million_bbleq': 'Total energy production (million bbl-eq/yr)',
     'oil_gas_ratio': 'Oil to gas ratio (J/J)',
-    'winterozone_exceed_num': 'Winter ozone exceedances (number of days/yr)',
+    'winterozone_exceed_num': 'Days with winter ozone exceedances at any monitoring location (days/yr)',
     'producing_wells': 'Total producing wells (count)',
     'newwells': 'New wells (count)',
     'prodfromhighwells_thousbbleq_mnth': 'High-yield well production (thousand bbl-eq/month)',
@@ -345,10 +345,13 @@ def main():
     Trends in air emissions data may be due to changes in technologies, regulations, or standard indusry practices.
     
     We note the following major regulatory rulemakings and other significant actions that may have impacted emissions trends:
-    * 2012-2015: CFR40, Part 60, Subpart OOOO, regulating organic compound emissions from new or modified oil and gas facilities, was phased in by EPA
-    * 2016: CFR40, Part 60, Subpart OOOOa, requiring periodic leak detection and repair at many facilities, was implemented.
+    * 2012-2015: [CFR40, Part 60, Subpart OOOO](https://www.ecfr.gov/current/title-40/chapter-I/subchapter-C/part-60/subpart-OOOO), regulating organic compound emissions from new or modified oil and gas facilities, was phased in by EPA
+    * 2014: Utah Division of Air Quality's [R307-500 Series rules](https://deq.utah.gov/air-quality/air-quality-laws-and-rules) for various oil and gas emissions were adopted.
+    * 2016: Full compliance with [CFR40, Part 60, Subpart OOOOa](https://www.ecfr.gov/current/title-40/chapter-I/subchapter-C/part-60/subpart-OOOOa), establishing methane and VOC standards for new and modified oil and gas sources, was required.
     * 2018: A [survey of operators](https://online.ucpress.edu/elementa/article/doi/10.1525/elementa.381/112514/Aerial-and-ground-based-optical-gas-imaging-survey) found that 83% performed leak detection and repair at all their facilities at least annually.
-    * 2024: Full compliance with the EPA Federal Implementation Plan for Indian Country Lands of the Uintah and Ouray Indian Reservation was required.
+    * 2022: Utah Division of Air Quality's [R307-500 Series rules](https://deq.utah.gov/air-quality/air-quality-laws-and-rules) regulating leak detection and repair, VOC control devices, and associated gas flaring were adopted.
+    * 2024: Full compliance with the [EPA Federal Implementation Plan for Indian Country Lands of the Uintah and Ouray Indian Reservation](https://www.epa.gov/air-quality-implementation-plans/fip-oil-and-natural-gas-sources-uintah-and-ouray-indian) was required.
+    * 2024: Full compliance with [CFR40, Part 60, Subpart OOOOb](https://www.ecfr.gov/current/title-40/chapter-I/subchapter-C/part-60/subpart-OOOOb), establishing additional methane and VOC standards for new and modified oil and gas sources, was required.
     
     Detailed information about the data used in this app is available at https://www.usu.edu/binghamresearch/dataexplorer.
     """)
@@ -440,7 +443,7 @@ def main():
                 st.markdown("""
                 **How to interpret the Correlation Matrix:**
                 
-                - **Color Scale**: Colors range from dark blue (strong negative correlation) to dark red (strong positive correlation)
+                - **Color Scale**: Colors range from dark blue (strong positive correlation) to dark red (strong negative correlation)
                 - **Numbers in cells**: Show the exact correlation coefficient (-1.0 to +1.0)
                 - **Diagonal**: Always shows 1.0 (perfect correlation of a variable with itself)
                 
