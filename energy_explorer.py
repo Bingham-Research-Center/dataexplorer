@@ -409,7 +409,7 @@ def main():
                 
                 **Tips:**
                 - Start with 2-3 variables to avoid overcrowding
-                - Use the correlation matrix below to identify strongly related variables
+                - Use the correlation matrix or scatter plot below to identify strongly related variables
                 - Adjust the year range to focus on periods of interest
                 """)
             
@@ -422,6 +422,31 @@ def main():
         show_correlation = st.checkbox("Show correlation matrix for selected variables")
 
         if show_correlation:
+            # Add expandable instructions (only when correlation is enabled)
+            with st.expander("ℹ️ Correlation Matrix Instructions"):
+                st.markdown("""
+                **How to interpret the Correlation Matrix:**
+                
+                - **Color Scale**: Colors range from dark blue (strong negative correlation) to dark red (strong positive correlation)
+                - **Numbers in cells**: Show the exact correlation coefficient (-1.0 to +1.0)
+                - **Diagonal**: Always shows 1.0 (perfect correlation of a variable with itself)
+                
+                **Understanding Correlation Values:**
+                - **+0.7 to +1.0**: Strong positive correlation (as one increases, the other tends to increase)
+                - **+0.3 to +0.7**: Moderate positive correlation
+                - **-0.3 to +0.3**: Weak or no linear correlation
+                - **-0.7 to -0.3**: Moderate negative correlation
+                - **-1.0 to -0.7**: Strong negative correlation (as one increases, the other tends to decrease)
+                
+                **Tips for Analysis:**
+                - Look for dark red or dark blue cells to identify strong relationships
+                - Consider potential causal relationships (correlation ≠ causation)
+                - Strong correlations may indicate variables that move together due to common drivers
+                - Use this to guide your scatter plot analysis below
+                
+                **Note**: Only variables selected in the time series above are included in this matrix.
+                """)
+            
             fig_corr = create_correlation_heatmap(filtered_df, selected_metrics)
             if fig_corr:
                 st.plotly_chart(fig_corr, use_container_width=True)
