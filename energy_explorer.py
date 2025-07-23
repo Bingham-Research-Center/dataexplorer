@@ -392,11 +392,14 @@ def main():
             if fig_ts:
                 st.plotly_chart(fig_ts, use_container_width=True)
         
-        # Correlation heatmap (always show)
+        # Correlation heatmap (show on demand)
         st.subheader("🔗 Correlation Analysis")
-        fig_corr = create_correlation_heatmap(filtered_df, selected_metrics)
-        if fig_corr:
-            st.plotly_chart(fig_corr, use_container_width=True)
+        show_correlation = st.checkbox("Show correlation matrix for selected variables")
+
+        if show_correlation:
+            fig_corr = create_correlation_heatmap(filtered_df, selected_metrics)
+            if fig_corr:
+                st.plotly_chart(fig_corr, use_container_width=True)
             
         # Scatter plot analysis
         st.subheader("📊 Scatter Plot Analysis")
